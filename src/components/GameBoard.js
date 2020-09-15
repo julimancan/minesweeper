@@ -19,15 +19,13 @@ const tileState = {
 
 const gridArray = [];
 
-for (let i = 0; i < rows; i++) {
+for (let i = 0; i < cols; i++) {
   let row = [];
-  for (let j = 0; j < cols; j++) {
+  for (let j = 0; j < rows; j++) {
     row.push({ ...tileState, posX: i, posY: j });
   }
   gridArray.push(row);
 }
-
-gridArray[0][5].isFlagged = true;
 
 const bombOptions = [];
 
@@ -36,8 +34,6 @@ for (let i = 0; i < cols; i++) {
     bombOptions.push([i, j]);
   }
 }
-
-console.log(bombOptions);
 
 for (let n = 0; n < totalBomb; n++) {
   let index = Math.floor(Math.random() * bombOptions.length);
@@ -53,8 +49,43 @@ for (let n = 0; n < totalBomb; n++) {
 
 console.log(gridArray);
 
+function assignBombCount(x, y) {
+  const tile = gridArray[x][y];
+  if (tile.isBomb) {
+    return -1;
+  }
+
+  let total = 0;
+  for (let xoffset = -1; xoffset <= 1; xoffset++) {
+    for (let yoffset = -1; yoffset <= 1; yoffset++) {
+      let i = x + xoffset;
+      let j = y + yoffset;
+
+      if (i > -1 && i < cols && j > -1 && j > -1 && j < rows) {
+        let neighbour = gridArray[i][j];
+        if (neighbour.isBomb) {
+          total++;
+        }
+      }
+    }
+  }
+  return total;
+}
+
+for (let i = 0; i < cols; i++) {
+  for (let j = 0; j < rows; j++) {
+    gridArray[i][j].neighborBombCount = assignBombCount(i, j);
+  }
+}
+
 const GameBoard = () => {
   const [grid, updateGrid] = useState(gridArray);
+
+  function revealTile(x, y) {
+    const toUpdate = [...grid];
+    toUpdate[x][y].isRevealed = true;
+    updateGrid([...toUpdate]);
+  }
 
   return (
     <div className="gameboard__container">
@@ -65,7 +96,18 @@ const GameBoard = () => {
           height: cols * length
         }}
       >
-        {grid.map((row) => row.map((tile) => <Tile tileState={tile} />))}
+        {grid.map((row, x) =>
+          row.map((tile, y) => (
+            <Tile
+              key={x * cols + y}
+              isBomb={tile.isBomb}
+              isFlagged={tile.isFlagged}
+              isRevealed={tile.isRevealed}
+              onClick={() => revealTile(tile.posX, tile.posY)}
+              neighborBombCount={tile.neighborBombCount}
+            />
+          ))
+        )}
       </div>
     </div>
   );

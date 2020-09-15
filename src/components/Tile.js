@@ -1,18 +1,27 @@
 import React from 'react';
 import './Tile.css';
 
-const Tile = ({ tileState }) => {
+const Tile = ({
+  isBomb,
+  isFlagged,
+  isRevealed,
+  onClick,
+  neighborBombCount
+}) => {
   const length = 30;
   return (
     <div
+      className="tile"
+      onClick={onClick}
       style={{
         width: length,
         height: length,
         border: 'solid 1px grey',
-        boxSizing: 'border-box'
+        boxSizing: 'border-box',
+        backgroundColor: isRevealed ? '#efefef' : 'white'
       }}
     >
-      {tileState.isBomb && '💣'}
+      {isRevealed && <div> {isBomb ? '💣' : neighborBombCount}</div>}
     </div>
   );
 };
