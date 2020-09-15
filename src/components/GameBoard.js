@@ -6,7 +6,7 @@ const rows = 16;
 const cols = 16;
 const length = 30;
 
-const totalBomb = 40;
+const totalBomb = 30;
 
 const tileState = {
   isRevealed: false,
@@ -85,6 +85,25 @@ const GameBoard = () => {
     const toUpdate = [...grid];
     toUpdate[x][y].isRevealed = true;
     updateGrid([...toUpdate]);
+    if (grid[x][y].neighborBombCount === 0) {
+      revealEmptyTiles(x, y);
+    }
+  }
+
+  function revealEmptyTiles(x, y) {
+    for (let xoffset = -1; xoffset <= 1; xoffset++) {
+      for (let yoffset = -1; yoffset <= 1; yoffset++) {
+        let i = x + xoffset;
+        let j = y + yoffset;
+
+        if (i > -1 && i < cols && j > -1 && j > -1 && j < rows) {
+          let neighbour = gridArray[i][j];
+          if (!neighbour.isRevealed) {
+            revealTile(i, j);
+          }
+        }
+      }
+    }
   }
 
   return (

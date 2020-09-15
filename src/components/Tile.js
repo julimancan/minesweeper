@@ -21,7 +21,11 @@ const Tile = ({
         backgroundColor: isRevealed ? '#efefef' : 'white'
       }}
     >
-      {isRevealed && <div> {isBomb ? '💣' : neighborBombCount}</div>}
+      {isRevealed && (
+        <div>
+          {isBomb ? '💣' : neighborBombCount > 0 ? neighborBombCount : null}
+        </div>
+      )}
     </div>
   );
 };
