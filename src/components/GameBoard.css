@@ -1,0 +1,11 @@
+.gameboard {
+  margin-top: 30px;
+  border: dashed 1px grey;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.gameboard__container {
+  display: flex;
+  place-content: center;
+}

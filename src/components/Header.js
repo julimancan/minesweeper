@@ -12,6 +12,7 @@ const Header = () => {
         </span>
       </div>
       <div className="header__timer">000</div>
+      <div className="header__social">Share</div>
     </div>
   );
 };
