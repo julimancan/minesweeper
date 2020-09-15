@@ -6,6 +6,7 @@ export const initialState = {
   cols: 16,
   length: 30,
   totalBombs: 10,
+  totalFlags: 10,
   gridArray: []
 };
 

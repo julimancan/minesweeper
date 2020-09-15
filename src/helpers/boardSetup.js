@@ -1,5 +1,5 @@
 const tileState = {
-  isRevealed: true,
+  isRevealed: false,
   isBomb: false,
   isFlagged: false,
   posX: 0,

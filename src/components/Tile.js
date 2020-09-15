@@ -6,13 +6,19 @@ const Tile = ({
   isFlagged,
   isRevealed,
   onClick,
-  neighborBombCount
+  neighborBombCount,
+  onContextMenu
 }) => {
   const length = 30;
+  function TileContent() {
+    if (isBomb) return '💣';
+    return neighborBombCount > 0 ? neighborBombCount : '';
+  }
   return (
     <div
       className="tile"
       onClick={onClick}
+      onContextMenu={onContextMenu}
       style={{
         width: length,
         height: length,
@@ -21,11 +27,7 @@ const Tile = ({
         backgroundColor: isRevealed ? '#efefef' : 'white'
       }}
     >
-      {isRevealed && (
-        <div>
-          {isBomb ? '💣' : neighborBombCount > 0 ? neighborBombCount : null}
-        </div>
-      )}
+      {isRevealed ? <TileContent /> : isFlagged && '🚩'}
     </div>
   );
 };

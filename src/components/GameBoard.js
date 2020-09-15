@@ -29,6 +29,16 @@ const GameBoard = () => {
     }
   }
 
+  function handleFlag(x, y) {
+    let flag = !gridArray[x][y].isFlagged;
+    dispatch({
+      type: 'SET_FLAG',
+      x,
+      y,
+      flag
+    });
+  }
+
   return (
     <div className="gameboard__container">
       <div
@@ -47,6 +57,10 @@ const GameBoard = () => {
               isRevealed={tile.isRevealed}
               neighborBombCount={tile.neighborBombCount}
               onClick={() => revealTile(tile.posX, tile.posY)}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                handleFlag(tile.posX, tile.posY);
+              }}
             />
           ))
         )}
