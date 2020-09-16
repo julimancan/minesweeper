@@ -12,14 +12,13 @@ const GameBoard = () => {
   const { rows, length, cols, totalBombs } = boardOptions;
 
   function handleFlag(x, y) {
-    let updatedGrid;
+    if (!isGameActive) return;
     let updateFlagAccount = flagCount;
     const tile = gridArray[x][y];
-    if (!isGameActive) return;
     if (!tile.isRevealed) {
       if (!tile.isFlagged) {
         if (flagCount - totalBombs !== 0) {
-          updatedGrid = setFlag(gridArray, x, y, true);
+          let updatedGrid = setFlag(gridArray, x, y, true);
           updateFlagAccount++;
           dispatch({
             type: 'SET_FLAG',
@@ -34,7 +33,7 @@ const GameBoard = () => {
         }
       } else {
         console.log('unsetting');
-        updatedGrid = setFlag(gridArray, x, y, false);
+        let updatedGrid = setFlag(gridArray, x, y, false);
         updateFlagAccount--;
         dispatch({
           type: 'SET_FLAG',
