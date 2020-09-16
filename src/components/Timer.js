@@ -16,9 +16,12 @@ const Timer = () => {
   }, [timeElapsed, isGameOver, isGameActive, dispatch]);
 
   return (
-    <span role="img" aria-label="clock">
-      ⏰ : {timeElapsed}
-    </span>
+    <div className="timer">
+      <span role="img" aria-label="clock">
+        ⏰
+      </span>
+      : {timeElapsed}
+    </div>
   );
 };
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import { useStateValue, initialState } from '../context/StateProvider';
+import './GameBanner.css';
 
 const GameBanner = () => {
   const [{ isGameOver, isGameActive, isWinner }, dispatch] = useStateValue();
@@ -10,7 +11,7 @@ const GameBanner = () => {
     dispatch({ type: 'RESET_GAME', payload: initialState });
   }
   return (
-    <div>
+    <div className="gamebanner">
       {isGameOver && (
         <span>
           {isWinner ? 'You won!' : 'Game is over!'}

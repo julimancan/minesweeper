@@ -1,5 +1,11 @@
 .header {
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
   margin-top: 20px;
+}
+
+.header__flags span {
+  font-size: 30px;
+  vertical-align: center;
 }

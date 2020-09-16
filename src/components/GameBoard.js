@@ -59,40 +59,32 @@ const GameBoard = () => {
   }
 
   return (
-    <>
+    <div className="gameboard__container">
       <div
-        className="gameboard__container"
-        onClick={(e) => {
-          if (!isGameActive) e.stopPropagation();
+        className="gameboard"
+        style={{
+          width: rows * length + 2,
+          height: cols * length
         }}
       >
-        <div
-          className="gameboard"
-          style={{
-            width: rows * length + 2,
-            height: cols * length
-          }}
-        >
-          {gridArray.map((row, x) =>
-            row.map((tile, y) => (
-              <Tile
-                key={x * cols + y}
-                isBomb={tile.isBomb}
-                isFlagged={tile.isFlagged}
-                isRevealed={tile.isRevealed}
-                neighborBombCount={tile.neighborBombCount}
-                onClick={() => handleReveal(tile.posX, tile.posY)}
-                onContextMenu={(e) => {
-                  e.preventDefault();
-                  handleFlag(tile.posX, tile.posY);
-                }}
-              />
-            ))
-          )}
-        </div>
+        {gridArray.map((row, x) =>
+          row.map((tile, y) => (
+            <Tile
+              key={x * cols + y}
+              isBomb={tile.isBomb}
+              isFlagged={tile.isFlagged}
+              isRevealed={tile.isRevealed}
+              neighborBombCount={tile.neighborBombCount}
+              onClick={() => handleReveal(tile.posX, tile.posY)}
+              onContextMenu={(e) => {
+                e.preventDefault();
+                handleFlag(tile.posX, tile.posY);
+              }}
+            />
+          ))
+        )}
       </div>
-      <GameBanner />
-    </>
+    </div>
   );
 };
 

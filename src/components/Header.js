@@ -10,15 +10,14 @@ const Header = () => {
     <div className="header">
       <div className="header__difficulty">Medium</div>
       <div className="header__flags">
-        Flags : {totalBombs - flagCount}
         <span role="img" aria-label="flag">
           🚩
         </span>
+        : {totalBombs - flagCount}
       </div>
       <div className="header__timer">
         <Timer />
       </div>
-      <div className="header__social">Share</div>
     </div>
   );
 };
