@@ -24,7 +24,7 @@ describe('Game', () => {
         <App />
       </StateProvider>
     );
-    const header = getByText(/ready for challenge!/i);
+    const header = getByText(/start/i);
     expect(header).toBeInTheDocument();
   });
 
@@ -50,11 +50,29 @@ describe('Game', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('successfully reveal a tile on the board', async () => {
-    const { container, debug } = render(
-      <StateProvider reducer={reducer} initialState={initialState}>
+  it('successfully display game over message', async () => {
+    const { container } = render(
+      <StateProvider
+        reducer={reducer}
+        initialState={{ ...initialState, isGameOver: true }}
+      >
         <App />
       </StateProvider>
     );
+    expect(queryByText(container, /game is over!/i)).toBeInTheDocument();
+  });
+
+  it('successfully restart game once it is over', async () => {
+    const { container } = render(
+      <StateProvider
+        reducer={reducer}
+        initialState={{ ...initialState, isGameOver: true }}
+      >
+        <App />
+      </StateProvider>
+    );
+    await waitForElement(() => getByText(container, /restart/i));
+    fireEvent.click(getByText(container, /restart/i));
+    expect(queryByText(container, /game is over!/i)).not.toBeInTheDocument();
   });
 });
