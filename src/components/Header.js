@@ -4,7 +4,7 @@ import { useStateValue } from '../context/StateProvider';
 import Timer from './Timer';
 
 const Header = () => {
-  const [{ boardOptions, flagCount }, dispatch] = useStateValue();
+  const { boardOptions, flagCount } = useStateValue()[0];
 
   return (
     <div className="header">
