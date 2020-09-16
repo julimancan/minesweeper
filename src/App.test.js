@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { screen } from '@testing-library/dom';
-
 import {
   render,
   cleanup,
   waitForElement,
   getByText,
   fireEvent,
-  queryByText
+  queryByText,
+  getAllByTestId
 } from '@testing-library/react';
 import App from './App';
 
 import { StateProvider } from './context/StateProvider';
 import reducer, { initialState } from './context/reducer';
+import { act } from 'react-dom/test-utils';
 
 afterEach(cleanup);
 
@@ -50,15 +50,24 @@ describe('Game', () => {
     ).not.toBeInTheDocument();
   });
 
-  it('successfully display game over message', async () => {
+  it('set the status to game over if user steps on a bomb', async () => {
+    let boardOptions = {
+      rows: 2,
+      cols: 2,
+      length: 30,
+      totalBombs: 1
+    };
     const { container } = render(
       <StateProvider
         reducer={reducer}
-        initialState={{ ...initialState, isGameOver: true }}
+        initialState={{ ...initialState, boardOptions }}
       >
         <App />
       </StateProvider>
     );
+    await waitForElement(() => getByText(container, /start/i));
+    fireEvent.click(getByText(container, /start/i));
+    fireEvent.click(getAllByTestId(container, 'bomb')[0]);
     expect(queryByText(container, /game is over!/i)).toBeInTheDocument();
   });
 
@@ -72,7 +81,7 @@ describe('Game', () => {
       </StateProvider>
     );
     await waitForElement(() => getByText(container, /restart/i));
-    fireEvent.click(getByText(container, /restart/i));
+    act(() => fireEvent.click(getByText(container, /restart/i)));
     expect(queryByText(container, /game is over!/i)).not.toBeInTheDocument();
   });
 });

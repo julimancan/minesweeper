@@ -3,7 +3,8 @@ import {
   render,
   getAllByTestId,
   fireEvent,
-  getByText
+  getByText,
+  queryByText
 } from '@testing-library/react';
 
 import GameBoard from './GameBoard';
@@ -47,7 +48,7 @@ describe('GameBoard', () => {
       length: 30,
       totalBombs: 1
     };
-    const { container, debug } = render(
+    const { container } = render(
       <StateProvider
         reducer={reducer}
         initialState={{ ...initialState, boardOptions, isGameActive: true }}
@@ -57,5 +58,26 @@ describe('GameBoard', () => {
     );
     act(() => fireEvent.contextMenu(getAllByTestId(container, 'hidden')[0]));
     expect(getByText(container, '🚩')).toBeInTheDocument();
+  });
+
+  it('succesfully unflag the flagged tile', () => {
+    let boardOptions = {
+      rows: 2,
+      cols: 2,
+      length: 30,
+      totalBombs: 1
+    };
+    const { container } = render(
+      <StateProvider
+        reducer={reducer}
+        initialState={{ ...initialState, boardOptions, isGameActive: true }}
+      >
+        <GameBoard />
+      </StateProvider>
+    );
+    fireEvent.contextMenu(getAllByTestId(container, 'hidden')[0]);
+    expect(getByText(container, '🚩')).toBeInTheDocument();
+    fireEvent.contextMenu(getByText(container, '🚩'));
+    expect(queryByText(container, '🚩')).not.toBeInTheDocument();
   });
 });
