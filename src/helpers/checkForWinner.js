@@ -1,4 +1,4 @@
-export function checkForWinner(gridArray) {
+export const checkForWinner = (gridArray) => {
   let isWinner = true;
   gridArray.forEach((row) => {
     row.forEach((tile) => {
@@ -7,4 +7,4 @@ export function checkForWinner(gridArray) {
   });
 
   return isWinner;
-}
+};

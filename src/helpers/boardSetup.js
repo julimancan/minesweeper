@@ -62,6 +62,7 @@ export function boardSetup(initState) {
         let i = x + xoffset;
         let j = y + yoffset;
 
+        //make sure we are still within the boundaries
         if (i > -1 && i < cols && j > -1 && j < rows) {
           let neighbour = gridArray[i][j];
           if (neighbour.isBomb) {
