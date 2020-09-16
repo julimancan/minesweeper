@@ -7,7 +7,8 @@ export const initialState = {
   length: 30,
   totalBombs: 10,
   totalFlags: 10,
-  gridArray: []
+  gridArray: [],
+  isGameOver: false
 };
 
 export const StateContext = createContext();
