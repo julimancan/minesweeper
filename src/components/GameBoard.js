@@ -21,7 +21,7 @@ const GameBoard = () => {
 
     if (!tile.isRevealed) {
       let updateFlagAccount = flagCount;
-      let updatedGrid;
+      let updatedGrid = null;
 
       if (!tile.isFlagged) {
         //if we have flag remaining
@@ -40,12 +40,14 @@ const GameBoard = () => {
         updatedGrid = setFlag(gridArray, x, y, false);
         updateFlagAccount--;
       }
-      dispatch({
-        //update the state with new grid data
-        type: 'SET_FLAG',
-        gridArray: updatedGrid,
-        flagCount: updateFlagAccount
-      });
+      if (updatedGrid) {
+        dispatch({
+          //update the state with new grid data
+          type: 'SET_FLAG',
+          gridArray: updatedGrid,
+          flagCount: updateFlagAccount
+        });
+      }
     }
   }
 
