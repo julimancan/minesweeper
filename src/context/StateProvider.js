@@ -8,6 +8,7 @@ export const initialState = {
   totalBombs: 5,
   gridArray: [],
   isGameOver: false,
+  isGameActive: false,
   flagCount: 0
 };
 

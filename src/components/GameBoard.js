@@ -4,10 +4,11 @@ import './GameBoard.css';
 import { useStateValue } from '../context/StateProvider';
 import { revealTiles } from '../helpers/revealTiles';
 import { setFlag } from '../helpers/setFlag';
+import GameBanner from './GameBanner';
 
 const GameBoard = () => {
   const [
-    { rows, length, cols, gridArray, isGameOver, flagCount, totalBombs },
+    { rows, length, cols, gridArray, flagCount, totalBombs, isGameActive },
     dispatch
   ] = useStateValue();
 
@@ -15,7 +16,7 @@ const GameBoard = () => {
     let updatedGrid;
     let updateFlagAccount = flagCount;
     const tile = gridArray[x][y];
-    if (isGameOver) return;
+    if (!isGameActive) return;
     if (!tile.isRevealed) {
       if (!tile.isFlagged) {
         if (flagCount - totalBombs !== 0) {
@@ -42,7 +43,7 @@ const GameBoard = () => {
 
   function handleReveal(x, y) {
     const tile = gridArray[x][y];
-    if (isGameOver || tile.isRevealed) return;
+    if (!isGameActive || tile.isRevealed) return;
     if (tile.isBomb === true) dispatch({ type: 'SET_GAME_OVER' });
     const updatedGrid = revealTiles(gridArray, x, y);
     dispatch({
@@ -53,7 +54,12 @@ const GameBoard = () => {
 
   return (
     <>
-      <div className="gameboard__container">
+      <div
+        className="gameboard__container"
+        onClick={(e) => {
+          if (!isGameActive) e.stopPropagation();
+        }}
+      >
         <div
           className="gameboard"
           style={{
@@ -79,16 +85,7 @@ const GameBoard = () => {
           )}
         </div>
       </div>
-      <div>
-        {isGameOver && (
-          <span>
-            Game is over! -{' '}
-            <button type="button" class="nes-btn is-warning">
-              Warning
-            </button>
-          </span>
-        )}
-      </div>
+      <GameBanner />
     </>
   );
 };

@@ -4,7 +4,7 @@ import './Timer.css';
 
 const Timer = () => {
   let [timeElapsed, setTimeElapsed] = useState(0);
-  const [{ isGameOver }, dispatch] = useStateValue();
+  const [{ isGameOver, isGameActive }, dispatch] = useStateValue();
 
   useEffect(() => {
     function incrementTime() {
@@ -13,8 +13,8 @@ const Timer = () => {
         setTimeElapsed(newTime);
       }, 1000);
     }
-    if (!isGameOver) incrementTime();
-  }, [timeElapsed, isGameOver]);
+    if (!isGameOver & isGameActive) incrementTime();
+  }, [timeElapsed, isGameOver, isGameActive]);
 
   return (
     <span role="img" aria-label="clock">
