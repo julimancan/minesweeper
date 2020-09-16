@@ -27,12 +27,12 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - 'b7:fb:02:6f:97:80:39:3a:ad:82:ab:7e:ed:f9:74:a2'
+            - 'a7:bd:7f:0b:bf:bd:20:48:b4:53:a7:20:06:53:7d:8b'
       - checkout
       - run:
           name: Push Master to Production
           command: |
-            git push https://github.com/letsandeepio/hackernews-clone-fe.git master:production
+            git push https://github.com/letsandeepio/minesweeper.git master:production
 
 workflows:
   version: 2
