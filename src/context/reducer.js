@@ -1,11 +1,12 @@
 import { boardSetup } from '../helpers/boardSetup';
+import { toRevealAllBombs } from '../helpers/toRevealAllBombs';
 
 export const actionTypes = {
   UPDATE_GRID: 'UPDATE_GRID',
-  SET_GAME_OVER: 'SET_GAME_OVER',
-  SET_FLAG: 'SET_FLAG',
   START_GAME: 'START_GAME',
   RESET_GAME: 'RESET_GAME',
+  SET_GAME_OVER: 'SET_GAME_OVER',
+  SET_FLAG: 'SET_FLAG',
   SET_TIMER: 'SET_TIMER',
   SET_WINNER: 'SET_WINNER'
 };
@@ -24,15 +25,10 @@ const reducer = (state, action) => {
         gridArray: [...action.gridArray]
       };
     case actionTypes.SET_GAME_OVER:
-      const toRevealBomb = state.gridArray.map((row) =>
-        row.map((tile) => {
-          if (tile.isBomb) tile.isRevealed = true;
-          return tile;
-        })
-      );
+      //reveal all bombs on game over
       return {
         ...state,
-        gridArray: toRevealBomb,
+        gridArray: toRevealAllBombs(state.gridArray),
         isGameActive: false,
         isGameOver: true
       };

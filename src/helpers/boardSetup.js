@@ -1,3 +1,4 @@
+// default state for all tiles to be initialized from
 const tileState = {
   isRevealed: false,
   isBomb: false,
@@ -10,8 +11,8 @@ const tileState = {
 export function boardSetup(initState) {
   const { cols, rows, totalBombs } = initState.boardOptions;
 
+  //generated 2d array based on colrs & rows
   let gridArray = [];
-
   for (let i = 0; i < cols; i++) {
     let row = [];
     for (let j = 0; j < rows; j++) {
@@ -20,28 +21,25 @@ export function boardSetup(initState) {
     gridArray.push(row);
   }
 
-  console.log(gridArray);
-
+  //generate all possible options of placing bombs
   const bombOptions = [];
-
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       bombOptions.push([i, j]);
     }
   }
 
+  //randomly set isBomb property on the grid based on totalBombs to be placed
   for (let n = 0; n < totalBombs; n++) {
     let index = Math.floor(Math.random() * bombOptions.length);
-
     let selected = bombOptions[index];
-
     let i = selected[0];
     let j = selected[1];
     bombOptions.splice(index, 1);
-
     gridArray[i][j].isBomb = true;
   }
 
+  //assign bomb count to all the tiles in the grid
   for (let i = 0; i < cols; i++) {
     for (let j = 0; j < rows; j++) {
       gridArray[i][j].neighborBombCount = assignBombCount(i, j);
@@ -49,18 +47,22 @@ export function boardSetup(initState) {
   }
 
   function assignBombCount(x, y) {
+    //function to assign bomb counts
     const tile = gridArray[x][y];
     if (tile.isBomb) {
+      //if tile is a bomb itself no need to count the neighbour count
       return -1;
     }
 
     let total = 0;
+
+    //select all 8 possible tiles around the given tile and loop through them
     for (let xoffset = -1; xoffset <= 1; xoffset++) {
       for (let yoffset = -1; yoffset <= 1; yoffset++) {
         let i = x + xoffset;
         let j = y + yoffset;
 
-        if (i > -1 && i < cols && j > -1 && j > -1 && j < rows) {
+        if (i > -1 && i < cols && j > -1 && j < rows) {
           let neighbour = gridArray[i][j];
           if (neighbour.isBomb) {
             total++;

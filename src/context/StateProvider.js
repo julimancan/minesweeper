@@ -6,7 +6,7 @@ export const initialState = {
     rows: 16,
     cols: 16,
     length: 30,
-    totalBombs: 5
+    totalBombs: 30
   },
   gridArray: [],
   isGameOver: false,
