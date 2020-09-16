@@ -4,7 +4,6 @@ import './GameBoard.css';
 import { useStateValue } from '../context/StateProvider';
 import { revealTiles } from '../helpers/revealTiles';
 import { setFlag } from '../helpers/setFlag';
-import GameBanner from './GameBanner';
 import { checkForWinner } from '../helpers/checkForWinner';
 
 const GameBoard = () => {

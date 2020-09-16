@@ -1,6 +1,8 @@
 import React from 'react';
 import './Tile.css';
 
+import { numColorCode } from '../helpers/colorCode';
+
 const Tile = ({
   isBomb,
   isFlagged,
@@ -24,10 +26,11 @@ const Tile = ({
         height: length,
         border: 'solid 1px grey',
         boxSizing: 'border-box',
-        backgroundColor: isRevealed ? '#efefef' : 'white'
+        backgroundColor: isRevealed ? '#efefef' : 'white',
+        color: numColorCode(neighborBombCount)
       }}
     >
-      {isRevealed ? <TileContent /> : isFlagged && '🚩'}
+      <div>{isRevealed ? <TileContent /> : isFlagged && '🚩'}</div>
     </div>
   );
 };
