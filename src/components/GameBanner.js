@@ -1,5 +1,7 @@
 import React from 'react';
-import { useStateValue, initialState } from '../context/StateProvider';
+import { useStateValue } from '../context/StateProvider';
+import { initialState } from '../context/reducer';
+
 import './GameBanner.css';
 
 const GameBanner = () => {

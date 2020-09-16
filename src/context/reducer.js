@@ -1,6 +1,21 @@
 import { boardSetup } from '../helpers/boardSetup';
 import { toRevealAllBombs } from '../helpers/toRevealAllBombs';
 
+export const initialState = {
+  boardOptions: {
+    rows: 16,
+    cols: 16,
+    length: 30,
+    totalBombs: 30
+  },
+  gridArray: [],
+  isGameOver: false,
+  isGameActive: false,
+  flagCount: 0,
+  timeElapsed: 0,
+  isWinner: false
+};
+
 export const actionTypes = {
   UPDATE_GRID: 'UPDATE_GRID',
   START_GAME: 'START_GAME',
