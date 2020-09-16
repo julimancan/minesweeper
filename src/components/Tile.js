@@ -4,21 +4,14 @@ import './Tile.css';
 import { numColorCode } from '../helpers/colorCode';
 import { getBackgroundColor } from '../helpers/getBackgroundColor';
 
-const Tile = ({
-  isBomb,
-  isFlagged,
-  isRevealed,
-  onClick,
-  neighborBombCount,
-  onContextMenu,
-  posX,
-  posY
-}) => {
-  const length = 30;
-  function TileContent() {
+const Tile = ({ tile, onClick, onContextMenu, length }) => {
+  const { isBomb, isFlagged, isRevealed, neighborBombCount, posX, posY } = tile;
+
+  const TileContent = () => {
     if (isBomb) return '💣';
     return neighborBombCount > 0 ? neighborBombCount : '';
-  }
+  };
+
   return (
     <div
       className="tile"
@@ -27,7 +20,6 @@ const Tile = ({
       style={{
         width: length,
         height: length,
-        boxSizing: 'border-box',
         backgroundColor: isRevealed
           ? getBackgroundColor(posX, posY, true)
           : getBackgroundColor(posX, posY),
