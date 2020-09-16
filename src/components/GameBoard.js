@@ -5,6 +5,7 @@ import { useStateValue } from '../context/StateProvider';
 import { revealTiles } from '../helpers/revealTiles';
 import { setFlag } from '../helpers/setFlag';
 import GameBanner from './GameBanner';
+import { checkForWinner } from '../helpers/checkForWinner';
 
 const GameBoard = () => {
   const [
@@ -28,6 +29,7 @@ const GameBoard = () => {
             flagCount: updateFlagAccount
           });
         }
+        checkForWinner(updatedGrid);
       } else {
         console.log('unsetting');
         updatedGrid = setFlag(gridArray, x, y, false);

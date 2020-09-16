@@ -14,7 +14,11 @@ const GameBanner = () => {
       {isGameOver && (
         <span>
           Game is over!
-          <button type="button" class="nes-btn is-warning" onClick={resetGame}>
+          <button
+            type="button"
+            className="nes-btn is-warning"
+            onClick={resetGame}
+          >
             Restart
           </button>
         </span>
@@ -23,7 +27,11 @@ const GameBanner = () => {
       {!isGameOver && !isGameActive && (
         <span>
           Ready for Challenge!
-          <button type="button" class="nes-btn is-success" onClick={startGame}>
+          <button
+            type="button"
+            className="nes-btn is-success"
+            onClick={startGame}
+          >
             Start
           </button>
         </span>

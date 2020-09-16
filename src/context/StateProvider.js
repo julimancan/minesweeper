@@ -5,12 +5,13 @@ export const initialState = {
   rows: 16,
   cols: 16,
   length: 30,
-  totalBombs: 5,
+  totalBombs: 2,
   gridArray: [],
   isGameOver: false,
   isGameActive: false,
   flagCount: 0,
-  timeElapsed: 0
+  timeElapsed: 0,
+  isWinner: false
 };
 
 export const StateContext = createContext();
