@@ -71,6 +71,27 @@ describe('Game', () => {
     expect(queryByText(container, /game is over!/i)).toBeInTheDocument();
   });
 
+  it('set the status to game won if user flag all mines', async () => {
+    let boardOptions = {
+      rows: 2,
+      cols: 2,
+      length: 30,
+      totalBombs: 1
+    };
+    const { container } = render(
+      <StateProvider
+        reducer={reducer}
+        initialState={{ ...initialState, boardOptions }}
+      >
+        <App />
+      </StateProvider>
+    );
+    await waitForElement(() => getByText(container, /start/i));
+    fireEvent.click(getByText(container, /start/i));
+    fireEvent.contextMenu(getAllByTestId(container, 'bomb')[0]);
+    expect(queryByText(container, /you won!/i)).toBeInTheDocument();
+  });
+
   it('successfully restart game once it is over', async () => {
     const { container } = render(
       <StateProvider
@@ -81,7 +102,10 @@ describe('Game', () => {
       </StateProvider>
     );
     await waitForElement(() => getByText(container, /restart/i));
-    act(() => fireEvent.click(getByText(container, /restart/i)));
+    act(() => {
+      fireEvent.click(getByText(container, /restart/i));
+      return;
+    });
     expect(queryByText(container, /game is over!/i)).not.toBeInTheDocument();
   });
 });

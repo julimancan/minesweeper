@@ -52,7 +52,7 @@ const GameBoard = () => {
   function handleReveal(x, y) {
     const tile = gridArray[x][y];
     if (!isGameActive || tile.isRevealed) return;
-    if (tile.isBomb === true) dispatch({ type: 'SET_GAME_OVER' }); //user clicked on a mine
+    if (tile.isBomb === true) dispatch({ type: 'SET_GAME_OVER' }); //user clicked on a bomb
     const updatedGrid = revealTiles(gridArray, x, y); //user helper function reveal the tile (or tiles if it is an empty one)
     dispatch({
       type: 'UPDATE_GRID',

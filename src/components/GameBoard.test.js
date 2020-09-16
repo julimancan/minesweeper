@@ -56,7 +56,10 @@ describe('GameBoard', () => {
         <GameBoard />
       </StateProvider>
     );
-    act(() => fireEvent.contextMenu(getAllByTestId(container, 'hidden')[0]));
+    act(() => {
+      fireEvent.contextMenu(getAllByTestId(container, 'hidden')[0]);
+      return;
+    });
     expect(getByText(container, '🚩')).toBeInTheDocument();
   });
 
