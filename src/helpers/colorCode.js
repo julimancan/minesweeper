@@ -7,5 +7,5 @@ export const numColorCode = (value) => {
     '#1976d2',
     '#1976d2'
   ];
-  return value < 6 ? colorArray[value + 1] : 'white';
+  return value < 6 ? colorArray[value] : 'red';
 };

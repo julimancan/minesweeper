@@ -2,6 +2,7 @@ import React from 'react';
 import './Tile.css';
 
 import { numColorCode } from '../helpers/colorCode';
+import { getBackgroundColor } from '../helpers/getBackgroundColor';
 
 const Tile = ({
   isBomb,
@@ -9,7 +10,9 @@ const Tile = ({
   isRevealed,
   onClick,
   neighborBombCount,
-  onContextMenu
+  onContextMenu,
+  posX,
+  posY
 }) => {
   const length = 30;
   function TileContent() {
@@ -24,9 +27,10 @@ const Tile = ({
       style={{
         width: length,
         height: length,
-        border: 'solid 1px grey',
         boxSizing: 'border-box',
-        backgroundColor: isRevealed ? '#efefef' : 'white',
+        backgroundColor: isRevealed
+          ? getBackgroundColor(posX, posY, true)
+          : getBackgroundColor(posX, posY),
         color: numColorCode(neighborBombCount)
       }}
     >

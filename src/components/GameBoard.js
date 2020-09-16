@@ -79,6 +79,8 @@ const GameBoard = () => {
                 e.preventDefault();
                 handleFlag(tile.posX, tile.posY);
               }}
+              posX={tile.posX}
+              posY={tile.posY}
             />
           ))
         )}
