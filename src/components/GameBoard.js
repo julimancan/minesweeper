@@ -3,22 +3,42 @@ import Tile from './Tile';
 import './GameBoard.css';
 import { useStateValue } from '../context/StateProvider';
 import { revealTiles } from '../helpers/revealTiles';
+import { setFlag } from '../helpers/setFlag';
 
 const GameBoard = () => {
   const [
-    { rows, length, cols, gridArray, isGameOver },
-    dispatch,
-    remaningFlagCount
+    { rows, length, cols, gridArray, isGameOver, flagCount, totalBombs },
+    dispatch
   ] = useStateValue();
 
   function handleFlag(x, y) {
-    let flag = !gridArray[x][y].isFlagged;
-    dispatch({
-      type: 'SET_FLAG',
-      x,
-      y,
-      flag
-    });
+    let updatedGrid;
+    let updateFlagAccount = flagCount;
+    const tile = gridArray[x][y];
+    if (isGameOver) return;
+    if (!tile.isRevealed) {
+      if (!tile.isFlagged) {
+        if (flagCount - totalBombs !== 0) {
+          updatedGrid = setFlag(gridArray, x, y, true);
+          updateFlagAccount++;
+          dispatch({
+            type: 'SET_FLAG',
+            gridArray: updatedGrid,
+            flagCount: updateFlagAccount
+          });
+        }
+      } else {
+        console.log('unsetting');
+        updatedGrid = setFlag(gridArray, x, y, false);
+        updateFlagAccount--;
+        dispatch({
+          type: 'SET_FLAG',
+          gridArray: updatedGrid,
+          flagCount: updateFlagAccount
+        });
+      }
+      console.log(flagCount);
+    }
   }
 
   function handleReveal(x, y) {

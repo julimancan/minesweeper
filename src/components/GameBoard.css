@@ -3,9 +3,11 @@
   border: dashed 1px grey;
   display: flex;
   flex-wrap: wrap;
+  -moz-user-select: none;
 }
 
 .gameboard__container {
   display: flex;
   place-content: center;
+  -moz-user-select: none;
 }

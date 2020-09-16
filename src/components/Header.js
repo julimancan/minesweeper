@@ -3,13 +3,13 @@ import './Header.css';
 import { useStateValue } from '../context/StateProvider';
 
 const Header = () => {
-  const [{ remaningFlagCount }, dispatch] = useStateValue();
+  const [{ totalBombs, flagCount }, dispatch] = useStateValue();
 
   return (
     <div className="header">
       <div className="header__difficulty">Medium</div>
       <div className="header__flags">
-        Flags : {remaningFlagCount}
+        Flags : {totalBombs - flagCount}
         <span role="img" aria-label="flag">
           🚩
         </span>

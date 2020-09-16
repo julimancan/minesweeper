@@ -5,9 +5,10 @@ export const initialState = {
   rows: 16,
   cols: 16,
   length: 30,
-  totalBombs: 10,
+  totalBombs: 5,
   gridArray: [],
-  isGameOver: false
+  isGameOver: false,
+  flagCount: 0
 };
 
 export const StateContext = createContext();

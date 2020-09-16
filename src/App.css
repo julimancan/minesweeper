@@ -3,4 +3,5 @@
   font-size: 12px;
   width: 600px;
   margin: 50px auto;
+  user-select: none;
 }

@@ -71,5 +71,5 @@ export function boardSetup(initState) {
     return total;
   }
 
-  return { ...initState, gridArray, remaningFlagCount: initState.totalBombs };
+  return { ...initState, gridArray };
 }
