@@ -18,8 +18,16 @@ const reducer = (state, action) => {
         gridArray: [...action.gridArray]
       };
     case actionTypes.SET_GAME_OVER:
+      const toRevealBomb = state.gridArray.map((row) =>
+        row.map((tile) => {
+          if (tile.isBomb) tile.isRevealed = true;
+          return tile;
+        })
+      );
+
       return {
         ...state,
+        gridArray: toRevealBomb,
         isGameOver: true
       };
     default:
