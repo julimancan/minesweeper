@@ -7,7 +7,8 @@ import { revealTiles } from '../helpers/revealTiles';
 const GameBoard = () => {
   const [
     { rows, length, cols, gridArray, isGameOver },
-    dispatch
+    dispatch,
+    remaningFlagCount
   ] = useStateValue();
 
   function handleFlag(x, y) {
@@ -21,8 +22,9 @@ const GameBoard = () => {
   }
 
   function handleReveal(x, y) {
-    if (isGameOver) return;
-    if (gridArray[x][y].isBomb === true) dispatch({ type: 'SET_GAME_OVER' });
+    const tile = gridArray[x][y];
+    if (isGameOver || tile.isRevealed || tile.isFlagged) return;
+    if (tile.isBomb === true) dispatch({ type: 'SET_GAME_OVER' });
     const updatedGrid = revealTiles(gridArray, x, y);
     dispatch({
       type: 'UPDATE_GRID',
