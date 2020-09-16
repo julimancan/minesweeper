@@ -1,6 +1,7 @@
 import React from 'react';
 import './Header.css';
 import { useStateValue } from '../context/StateProvider';
+import Timer from './Timer';
 
 const Header = () => {
   const [{ totalBombs, flagCount }, dispatch] = useStateValue();
@@ -14,7 +15,9 @@ const Header = () => {
           🚩
         </span>
       </div>
-      <div className="header__timer">000</div>
+      <div className="header__timer">
+        <Timer />
+      </div>
       <div className="header__social">Share</div>
     </div>
   );

@@ -37,7 +37,6 @@ const GameBoard = () => {
           flagCount: updateFlagAccount
         });
       }
-      console.log(flagCount);
     }
   }
 
@@ -80,7 +79,16 @@ const GameBoard = () => {
           )}
         </div>
       </div>
-      <div>{isGameOver && <span>Game is over!</span>}</div>
+      <div>
+        {isGameOver && (
+          <span>
+            Game is over! -{' '}
+            <button type="button" class="nes-btn is-warning">
+              Warning
+            </button>
+          </span>
+        )}
+      </div>
     </>
   );
 };
