@@ -2,7 +2,7 @@ import React from 'react';
 import { useStateValue, initialState } from '../context/StateProvider';
 
 const GameBanner = () => {
-  const [{ isGameOver, isGameActive }, dispatch] = useStateValue();
+  const [{ isGameOver, isGameActive, isWinner }, dispatch] = useStateValue();
   function startGame() {
     dispatch({ type: 'START_GAME' });
   }
@@ -13,7 +13,7 @@ const GameBanner = () => {
     <div>
       {isGameOver && (
         <span>
-          Game is over!
+          {isWinner ? 'You won!' : 'Game is over!'}
           <button
             type="button"
             className="nes-btn is-warning"

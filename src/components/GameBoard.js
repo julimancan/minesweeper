@@ -28,8 +28,12 @@ const GameBoard = () => {
             gridArray: updatedGrid,
             flagCount: updateFlagAccount
           });
+          if (checkForWinner(updatedGrid)) {
+            dispatch({
+              type: 'SET_WINNER'
+            });
+          }
         }
-        checkForWinner(updatedGrid);
       } else {
         console.log('unsetting');
         updatedGrid = setFlag(gridArray, x, y, false);

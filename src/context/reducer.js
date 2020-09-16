@@ -6,7 +6,8 @@ export const actionTypes = {
   SET_FLAG: 'SET_FLAG',
   START_GAME: 'START_GAME',
   RESET_GAME: 'RESET_GAME',
-  SET_TIMER: 'SET_TIMER'
+  SET_TIMER: 'SET_TIMER',
+  SET_WINNER: 'SET_WINNER'
 };
 
 const reducer = (state, action) => {
@@ -49,6 +50,13 @@ const reducer = (state, action) => {
       return {
         ...state,
         timeElapsed: action.time
+      };
+    case actionTypes.SET_WINNER:
+      return {
+        ...state,
+        isGameActive: false,
+        isGameOver: true,
+        isWinner: true
       };
     default:
       return state;
