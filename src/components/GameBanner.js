@@ -4,12 +4,12 @@ import './GameBanner.css';
 
 const GameBanner = () => {
   const [{ isGameOver, isGameActive, isWinner }, dispatch] = useStateValue();
-  function startGame() {
+  const startGame = () => {
     dispatch({ type: 'START_GAME' });
-  }
-  function resetGame() {
+  };
+  const resetGame = () => {
     dispatch({ type: 'RESET_GAME', payload: initialState });
-  }
+  };
   return (
     <div className="gamebanner">
       {isGameOver && (
