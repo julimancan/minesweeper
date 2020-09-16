@@ -20,6 +20,7 @@ export function revealTiles(prevGridArray, x, y) {
   }
 
   function revealTile(x, y) {
+    if (gridArray[x][y].isFlagged) return;
     gridArray[x][y].isRevealed = true;
     if (gridArray[x][y].neighborBombCount === 0) {
       revealEmptyTiles(x, y);

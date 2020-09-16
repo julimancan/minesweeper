@@ -43,7 +43,7 @@ const GameBoard = () => {
 
   function handleReveal(x, y) {
     const tile = gridArray[x][y];
-    if (isGameOver || tile.isRevealed || tile.isFlagged) return;
+    if (isGameOver || tile.isRevealed) return;
     if (tile.isBomb === true) dispatch({ type: 'SET_GAME_OVER' });
     const updatedGrid = revealTiles(gridArray, x, y);
     dispatch({
