@@ -7,10 +7,9 @@ import { setFlag } from '../helpers/setFlag';
 import { checkForWinner } from '../helpers/checkForWinner';
 
 const GameBoard = () => {
-  const [
-    { rows, length, cols, gridArray, flagCount, totalBombs, isGameActive },
-    dispatch
-  ] = useStateValue();
+  const [state, dispatch] = useStateValue();
+  const { boardOptions, gridArray, flagCount, isGameActive } = state;
+  const { rows, length, cols, totalBombs } = boardOptions;
 
   function handleFlag(x, y) {
     let updatedGrid;

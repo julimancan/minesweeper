@@ -8,7 +8,7 @@ const tileState = {
 };
 
 export function boardSetup(initState) {
-  const { cols, rows, totalBombs } = initState;
+  const { cols, rows, totalBombs } = initState.boardOptions;
 
   let gridArray = [];
 

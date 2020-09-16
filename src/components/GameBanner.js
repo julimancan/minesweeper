@@ -8,7 +8,7 @@ const GameBanner = () => {
     dispatch({ type: 'START_GAME' });
   };
   const resetGame = () => {
-    dispatch({ type: 'RESET_GAME', payload: initialState });
+    dispatch({ type: 'RESET_GAME', payload: initialState }); //reset game with original state
   };
   return (
     <div className="gamebanner">
