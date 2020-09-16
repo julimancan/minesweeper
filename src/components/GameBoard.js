@@ -57,7 +57,7 @@ const GameBoard = () => {
         <div
           className="gameboard"
           style={{
-            width: rows * length,
+            width: rows * length + 2,
             height: cols * length
           }}
         >
