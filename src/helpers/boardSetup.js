@@ -11,7 +11,7 @@ const tileState = {
 export function boardSetup(initState) {
   const { cols, rows, totalBombs } = initState.boardOptions;
 
-  //generated 2d array based on colrs & rows
+  //generate 2d array based on colrs & rows with tile elements
   let gridArray = [];
   for (let i = 0; i < cols; i++) {
     let row = [];
@@ -47,7 +47,6 @@ export function boardSetup(initState) {
   }
 
   function assignBombCount(x, y) {
-    //function to assign bomb counts
     const tile = gridArray[x][y];
     if (tile.isBomb) {
       //if tile is a bomb itself no need to count the neighbour count
