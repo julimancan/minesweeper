@@ -5,7 +5,8 @@ export const actionTypes = {
   SET_GAME_OVER: 'SET_GAME_OVER',
   SET_FLAG: 'SET_FLAG',
   START_GAME: 'START_GAME',
-  RESET_GAME: 'RESET_GAME'
+  RESET_GAME: 'RESET_GAME',
+  SET_TIMER: 'SET_TIMER'
 };
 
 const reducer = (state, action) => {
@@ -43,6 +44,11 @@ const reducer = (state, action) => {
       return {
         ...boardSetup(action.payload),
         isGameActive: true
+      };
+    case actionTypes.SET_TIMER:
+      return {
+        ...state,
+        timeElapsed: action.time
       };
     default:
       return state;

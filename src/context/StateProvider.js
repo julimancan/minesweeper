@@ -9,7 +9,8 @@ export const initialState = {
   gridArray: [],
   isGameOver: false,
   isGameActive: false,
-  flagCount: 0
+  flagCount: 0,
+  timeElapsed: 0
 };
 
 export const StateContext = createContext();

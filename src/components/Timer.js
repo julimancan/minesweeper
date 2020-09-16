@@ -1,20 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useStateValue } from '../context/StateProvider';
 import './Timer.css';
 
 const Timer = () => {
-  let [timeElapsed, setTimeElapsed] = useState(0);
-  const [{ isGameOver, isGameActive }, dispatch] = useStateValue();
+  const [{ isGameOver, isGameActive, timeElapsed }, dispatch] = useStateValue();
 
   useEffect(() => {
     function incrementTime() {
       setTimeout(() => {
         let newTime = timeElapsed + 1;
-        setTimeElapsed(newTime);
+        dispatch({ type: 'SET_TIMER', time: newTime });
       }, 1000);
     }
     if (!isGameOver & isGameActive) incrementTime();
-  }, [timeElapsed, isGameOver, isGameActive]);
+  }, [timeElapsed, isGameOver, isGameActive, dispatch]);
 
   return (
     <span role="img" aria-label="clock">

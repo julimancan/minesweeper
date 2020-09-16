@@ -15,7 +15,7 @@ const GameBanner = () => {
         <span>
           Game is over!
           <button type="button" class="nes-btn is-warning" onClick={resetGame}>
-            Warning
+            Restart
           </button>
         </span>
       )}
