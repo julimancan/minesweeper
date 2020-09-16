@@ -6,13 +6,13 @@ const Timer = () => {
   const [{ isGameOver, isGameActive, timeElapsed }, dispatch] = useStateValue();
 
   useEffect(() => {
-    function incrementTime() {
+    const incrementTimer = () => {
       setTimeout(() => {
         let newTime = timeElapsed + 1;
         dispatch({ type: 'SET_TIMER', time: newTime });
       }, 1000);
-    }
-    if (!isGameOver & isGameActive) incrementTime();
+    };
+    if (!isGameOver & isGameActive) incrementTimer();
   }, [timeElapsed, isGameOver, isGameActive, dispatch]);
 
   return (
