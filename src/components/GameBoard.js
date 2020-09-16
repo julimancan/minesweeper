@@ -65,6 +65,7 @@ const GameBoard = () => {
       <div
         className="gameboard"
         style={{
+          //dynamically set the width of the board based on length of the tile, and rows & cols
           width: rows * length + 2,
           height: cols * length
         }}

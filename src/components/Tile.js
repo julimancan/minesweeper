@@ -7,6 +7,7 @@ import { getBackgroundColor } from '../helpers/getBackgroundColor';
 const Tile = ({ tile, onClick, onContextMenu, length }) => {
   const { isBomb, isFlagged, isRevealed, neighborBombCount, posX, posY } = tile;
 
+  //mini component to simplify nested conditional renders
   const TileContent = () => {
     if (isBomb) return '💣';
     return neighborBombCount > 0 ? neighborBombCount : '';
@@ -20,9 +21,9 @@ const Tile = ({ tile, onClick, onContextMenu, length }) => {
       style={{
         width: length,
         height: length,
-        backgroundColor: isRevealed
-          ? getBackgroundColor(posX, posY, true)
-          : getBackgroundColor(posX, posY),
+        backgroundColor: isRevealed //get backaground color based on if cell is hidden or revealed
+          ? getBackgroundColor(posX, posY, true) //revealed
+          : getBackgroundColor(posX, posY), //hidden
         color: numColorCode(neighborBombCount)
       }}
     >
