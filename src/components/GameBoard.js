@@ -21,6 +21,8 @@ const GameBoard = () => {
   }
 
   function handleReveal(x, y) {
+    if (isGameOver) return;
+    if (gridArray[x][y].isBomb === true) dispatch({ type: 'SET_GAME_OVER' });
     const updatedGrid = revealTiles(gridArray, x, y);
     dispatch({
       type: 'UPDATE_GRID',
@@ -29,32 +31,35 @@ const GameBoard = () => {
   }
 
   return (
-    <div className="gameboard__container">
-      <div
-        className="gameboard"
-        style={{
-          width: rows * length,
-          height: cols * length
-        }}
-      >
-        {gridArray.map((row, x) =>
-          row.map((tile, y) => (
-            <Tile
-              key={x * cols + y}
-              isBomb={tile.isBomb}
-              isFlagged={tile.isFlagged}
-              isRevealed={tile.isRevealed}
-              neighborBombCount={tile.neighborBombCount}
-              onClick={() => handleReveal(tile.posX, tile.posY)}
-              onContextMenu={(e) => {
-                e.preventDefault();
-                handleFlag(tile.posX, tile.posY);
-              }}
-            />
-          ))
-        )}
+    <>
+      <div className="gameboard__container">
+        <div
+          className="gameboard"
+          style={{
+            width: rows * length,
+            height: cols * length
+          }}
+        >
+          {gridArray.map((row, x) =>
+            row.map((tile, y) => (
+              <Tile
+                key={x * cols + y}
+                isBomb={tile.isBomb}
+                isFlagged={tile.isFlagged}
+                isRevealed={tile.isRevealed}
+                neighborBombCount={tile.neighborBombCount}
+                onClick={() => handleReveal(tile.posX, tile.posY)}
+                onContextMenu={(e) => {
+                  e.preventDefault();
+                  handleFlag(tile.posX, tile.posY);
+                }}
+              />
+            ))
+          )}
+        </div>
       </div>
-    </div>
+      <div>{isGameOver && <span>Game is over!</span>}</div>
+    </>
   );
 };
 
